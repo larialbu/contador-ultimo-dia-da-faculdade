@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contador Regressivo</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+  }
+  #contador-container {
+    margin-top: 50px;
+  }
+  #contador {
+    font-size: 36px;
+    margin-top: 20px;
+    color: #333;
+  }
+  #imagem {
+    max-width: 50%;
+    height: 400px;
+    margin-bottom: 40px;
+  }
+</style>
+</head>
+<body>
+<div id="contador-container">
+  <img id="imagem" src="img/faul.jpg" alt="Imagem">
+  <h2>Fim do pesadelo UNICAPETA<h2>
+  <div id="contador"></div>
+  <h2>Data final: 19/06/2024</h2>
+</div>
+
+<script>
+const dataTermino = new Date('June 19, 2024 00:00:00').getTime();
+
+const atualizarContador = setInterval(function() {
+  const agora = new Date().getTime();
+  
+  const diferenca = dataTermino - agora;
+  
+  const dias = Math.floor(diferenca / (1000 * 60 * 60 * 24));
+  const horas = Math.floor((diferenca % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutos = Math.floor((diferenca % (1000 * 60 * 60)) / (1000 * 60));
+  const segundos = Math.floor((diferenca % (1000 * 60)) / 1000);
+  
+  document.getElementById('contador').innerHTML = `${dias}d ${horas}h ${minutos}m ${segundos}s`;
+  
+  if (diferenca < 0) {
+    clearInterval(atualizarContador);
+    document.getElementById('contador').innerHTML = 'Chegou o dia!';
+  }
+}, 1000); 
+</script>
+</body>
+</html>
